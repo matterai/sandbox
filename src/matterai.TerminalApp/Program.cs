@@ -1,4 +1,5 @@
 ﻿using System;
+using matterai.AudioConverter;
 
 namespace matterai.TerminalApp
 {
@@ -6,11 +7,22 @@ namespace matterai.TerminalApp
     {
         static void Main(string[] args)
         {
+            // RunEventArgsSandbox();
+            
+            var converter = new FfmpegConverter("/usr/bin/ffmpeg");
+            
+            converter.OggToMp3Async("/home/matterai/Downloads/yandex.ogg", "/home/matterai/Downloads/yandex.mp3");
+
+            Console.ReadKey();
+        }
+
+        private static void RunEventArgsSandbox()
+        {
             var counter = new Counter(10);
 
-            counter.OnThresholdReached += (sender, reached) 
+            counter.OnThresholdReached += (sender, reached)
                 => Console.WriteLine($"[{reached.Occured:u}]: {reached.Message}");
-            
+
             counter.Add(5);
             counter.Add(6);
 
